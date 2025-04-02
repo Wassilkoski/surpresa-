@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.2/mo.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcc80;
+            font-family: Arial, sans-serif;
+        }
+        .love-container {
+            font-size: 50px;
+            font-weight: bold;
+            color: #6A1B9A;
+            position: relative;
+        }
+        .heart {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="love-container">
+        I <span class="heart">❤️</span> YOU
+    </div>
+
+    <script>
+        const crtLoveTL = () => {
+            const move = 1000;
+            const easing = "sin.inOut";
+
+            return new mojs.Timeline().add([
+                new mojs.Tween({
+                    duration: move,
+                    onUpdate: (progress) => {
+                        document.querySelector('.love-container').style.transform = `scale(${1 + progress * 0.5})`;
+                    },
+                    onComplete: () => {
+                        document.querySelector('.love-container').style.opacity = 0;
+                    }
+                }),
+            ]);
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const animation = crtLoveTL();
+            setTimeout(() => animation.play(), 500);
+        });
+    </script>
+
+</body>
+</html>
